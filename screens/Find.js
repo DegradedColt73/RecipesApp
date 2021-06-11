@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { View, TextInput, StyleSheet, FlatList, Text, Linking } from 'react-native';
 import globalStyles from '../styles/styles';
-import StatusBarOnFocusRefreshableComponent from '../classes/StatusBarOnFocusRefreshableComponent';
 import TitleBar from '../shared/TitleBar';
 import Card from '../shared/Card';
 
+
 //Find Screen Component
-export default class Find extends StatusBarOnFocusRefreshableComponent {
+export default class Find extends Component {
 
     //Component lifecycle
     state = {
@@ -35,7 +35,7 @@ export default class Find extends StatusBarOnFocusRefreshableComponent {
 
         return (
             <React.Fragment>
-                <TitleBar name={this.props.route.name} theme={this.theme}></TitleBar>
+                <TitleBar name={this.props.route.name} theme={this.theme} navigation={this.props.navigation}></TitleBar>
                 <View style={globalStyles.screenContainer}>
                     <TextInput onChangeText={(text) => { this.inputTextTracker(text) }} placeholder="Wypisz składniki" style={this.styles.inputField}></TextInput>
                     {properView}
