@@ -66,6 +66,10 @@ export default class TitleBar extends Component {
         );
     };
 
+    componentWillUnmount(){
+        props.navigation.removeListener('focus');
+    }
+
     updateStatusBarColor = (color) => {
         StatusBar.setBackgroundColor(color);
     }
