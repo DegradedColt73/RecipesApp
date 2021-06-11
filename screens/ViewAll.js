@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, ActivityIndicator, FlatList } from 'react-native';
 import Card from '../shared/Card';
 import TitleBar from '../shared/TitleBar';
-import StatusBarOnFocusRefreshableComponent from '../classes/StatusBarOnFocusRefreshableComponent';
 
 
 //View all component
-export default class ViewAll extends StatusBarOnFocusRefreshableComponent {
+export default class ViewAll extends Component {
 
   state = {
     data: [],
@@ -26,7 +25,7 @@ export default class ViewAll extends StatusBarOnFocusRefreshableComponent {
   render() {
     return (
       <React.Fragment>
-        <TitleBar name={this.props.route.name} theme={this.theme}></TitleBar>
+        <TitleBar name={this.props.route.name} theme={this.theme} navigation={this.props.navigation}></TitleBar>
         {this.state.isLoading ? <ActivityIndicator /> :
           <FlatList contentContainerStyle={{paddingBottom: 20}} style={{paddingTop: 20}} data={this.state.data}
             renderItem={({ item }) =>

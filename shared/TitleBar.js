@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, StatusBar, TouchableOpacity, ImageBackground } from 'react-native';
+import { View, StyleSheet, Text, StatusBar, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { navigationRef } from '../routes/rootNavigation';
 import { DrawerActions } from '@react-navigation/native';
@@ -7,6 +7,12 @@ import { DrawerActions } from '@react-navigation/native';
 export default class TitleBar extends Component {
 
     constructor(props) {
+        props.navigation.addListener(
+            'focus',
+            () => {
+                this.forceUpdate();
+            }
+        )
 
         super(props);
 
@@ -18,7 +24,7 @@ export default class TitleBar extends Component {
                 primaryText: '#000000'
             }
         }
-
+        
         this.isHome = false;
 
         if (props.theme) {

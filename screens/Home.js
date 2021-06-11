@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View } from 'react-native';
 import globalStyles from '../styles/styles';
 import HomeTileComponent from '../components/HomeTileContainer';
 import TitleBar from '../shared/TitleBar';
-import StatusBarOnFocusRefreshableComponent from '../classes/StatusBarOnFocusRefreshableComponent';
+
 
 //Home screen component
-export default class Home extends StatusBarOnFocusRefreshableComponent {
+export default class Home extends Component {
 
   //Component lifecycle
   constructor(props){
@@ -16,7 +16,7 @@ export default class Home extends StatusBarOnFocusRefreshableComponent {
   render() {
     return (
       <React.Fragment>
-        <TitleBar name={this.props.route.name} theme={this.theme} home={true}></TitleBar>
+        <TitleBar name={this.props.route.name} theme={this.theme} home={true} navigation={this.props.navigation}></TitleBar>
         <View style={globalStyles.screenContainer}>
           <HomeTileComponent></HomeTileComponent>
         </View>
