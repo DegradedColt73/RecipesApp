@@ -7,7 +7,7 @@ import Info from '../screens/Info';
 import Find from '../screens/Find';
 import ViewAll from '../screens/ViewAll';
 
-//Navigation drawer
+//navigation drawer
 export default class HomeDrawer extends Component {
 
     //component logic

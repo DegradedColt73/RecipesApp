@@ -4,28 +4,19 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { navigationRef } from '../routes/rootNavigation';
 import { DrawerActions } from '@react-navigation/native';
 
+//title bar componend - includes management of status bar
 export default class TitleBar extends Component {
 
-    constructor(props) {
-        props.navigation.addListener(
-            'focus',
-            () => {
-                this.forceUpdate();
-            }
-        )
+    //component lifecycle
+    
+    //props: home:optional, name:required, navigation:required, theme: optional
 
+    constructor(props) {
         super(props);
 
-        this.theme = {
-            color: {
-                primary: '#bdbdbd',
-                primaryLight: '#efefef',
-                primaryDark: '#8d8d8d',
-                primaryText: '#000000'
-            }
+        if (props.home) {
+            this.isHome = true;
         }
-        
-        this.isHome = false;
 
         if (props.theme) {
             this.theme.color.primary = props.theme.color.primary;
@@ -34,10 +25,13 @@ export default class TitleBar extends Component {
             this.theme.color.primaryText = props.theme.color.primaryText;
         }
 
-        if (props.home) {
-            this.isHome = true;
-        }
-
+        props.navigation.addListener(
+            'focus',
+            () => {
+                this.updateStatusBarColor(this.theme.color.primaryDark);
+            }
+        )
+    
         this.createStyles(this.theme);
     }
 
@@ -55,7 +49,7 @@ export default class TitleBar extends Component {
                             <MaterialIcons
                                 name={(this.isHome) ? 'menu' : 'arrow-back'}
                                 color={this.theme.color.primaryText}
-                                size={40}>
+                                size={26}>
                             </MaterialIcons>
                         </TouchableOpacity>
                         <Text style={this.styles.title}>{this.props.name}</Text>
@@ -66,24 +60,32 @@ export default class TitleBar extends Component {
         );
     };
 
-    componentWillUnmount(){
-        props.navigation.removeListener('focus');
+    //component logic
+    theme = {
+        color: {
+            primary: '#bdbdbd',
+            primaryLight: '#efefef',
+            primaryDark: '#8d8d8d',
+            primaryText: '#000000'
+        }
     }
+
+    home = false;
 
     updateStatusBarColor = (color) => {
         StatusBar.setBackgroundColor(color);
     }
 
-
+    //styles
     createStyles = (theme) => {
         this.styles = StyleSheet.create({
             container: {
                 //structure
-                height: 70,
+                height: 60,
                 //look
                 elevation: 10,
-                //content
                 backgroundColor: this.theme.color.primaryLight,
+                //content
                 flexDirection: 'row',
                 justifyContent: 'flex-start',
                 alignItems: 'center',
@@ -91,7 +93,7 @@ export default class TitleBar extends Component {
             },
             title: {
                 color: this.theme.color.primaryText,
-                fontSize: 26,
+                fontSize: 18,
                 fontFamily: 'OpenSans-Regular',
                 paddingLeft: 20
             },

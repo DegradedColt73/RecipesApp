@@ -5,10 +5,11 @@ import TitleBar from '../shared/TitleBar';
 import Card from '../shared/Card';
 
 
-//Find Screen Component
+//find screen component
 export default class Find extends Component {
 
-    //Component lifecycle
+    //component lifecycle
+    //part of navigations
     state = {
         data: [],
         operationalData: [],

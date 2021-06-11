@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, Dimensions } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
+//tile shared component
 export default class Tile extends Component {
-    
+
+    //component lifecycle
+
+    //props: backgroundColor:required, iconName:required
+
     render() {
         return (
             <View style={this.styles.cardContainer}>
@@ -15,6 +20,7 @@ export default class Tile extends Component {
         );
     };
 
+    //styles
     styles = StyleSheet.create({
         cardContainer: {
             //structure

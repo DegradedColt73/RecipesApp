@@ -4,15 +4,17 @@ import Card from '../shared/Card';
 import TitleBar from '../shared/TitleBar';
 
 
-//View all component
+//view all component
 export default class ViewAll extends Component {
+
+  //component lifecycle
+  //part of navigation
 
   state = {
     data: [],
     isLoading: true
   }
 
-  //component lifecycle
   constructor(props) {
     super(props);
 

@@ -5,10 +5,11 @@ import HomeTileComponent from '../components/HomeTileContainer';
 import TitleBar from '../shared/TitleBar';
 
 
-//Home screen component
+//home screen component
 export default class Home extends Component {
 
-  //Component lifecycle
+  //component lifecycle
+  //part of navigation 
   constructor(props){
     super(props);
   }

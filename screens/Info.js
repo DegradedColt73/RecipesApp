@@ -4,10 +4,11 @@ import globalStyles from '../styles/styles';
 import TitleBar from '../shared/TitleBar';
 
 
-//Info Screen Component
+//info Screen Component
 export default class Info extends Component {
 
   //component lifecycle
+  //part of navigation
   constructor(props) {
     super(props);
   };

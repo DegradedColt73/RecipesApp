@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
+//card shared component
 export default class Card extends Component {
+
+    //component lifecycle
+
+    //props: title:required, content:required
     render() {
         return (
             <View style={this.styles.cardContainer}>
@@ -22,6 +27,7 @@ export default class Card extends Component {
         );
     };
 
+    //styles
     styles = StyleSheet.create({
         cardContainer: {
             //structure
