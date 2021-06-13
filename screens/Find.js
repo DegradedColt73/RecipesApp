@@ -17,6 +17,7 @@ export default class Find extends Component {
         inputComponents: [],
         currentMatchData: [],
         operationalData: [],
+        matchedDataSnapshot: [],
         inputComponentsCount: 1
     };
 
@@ -56,6 +57,7 @@ export default class Find extends Component {
             .catch((error) => console.error(error))
             .finally(() => {
                 this.setState({ isLoading: false });
+                this.setState({ operationalData: JSON.parse(JSON.stringify(this.state.data)) });
             });
     }
 
@@ -70,27 +72,43 @@ export default class Find extends Component {
     }
 
     inputTextTracker = (text) => {
-        this.setState({ operationalData: JSON.parse(JSON.stringify(this.state.data)) }, () =>{
-            this.setState({ currentMatchData: this.componentMatcher(this.state.operationalData, text)});
-        })
+        console.log(this.state.matchedDataSnapshot);
+        this.setState({ inputComponents: text.split(' ') }, () => {
+            if(this.state.inputComponents.length > this.state.inputComponentsCount){
+                console.log('a word is added now');
+                this.setState({ operationalData: this.componentMatcher(this.state.currentMatchData, this.state.inputComponents[this.state.inputComponents.length - 2]) }, () => {
+                    this.setState({ currentMatchData: this.state.operationalData })
+                    this.setState({ inputComponentsCount: this.state.inputComponents.length })
+                    let tmpSnapshotArray = [...this.state.matchedDataSnapshot];
+                    tmpSnapshotArray[this.state.inputComponents.length - 2] = JSON.parse(JSON.stringify(this.state.currentMatchData));
+                    this.setState({ matchedDataSnapshot: tmpSnapshotArray});
+                })
+            } else if(this.state.inputComponents.length < this.state.inputComponentsCount){
+                console.log('a word is deleted now');
+                this.setState({ inputComponentsCount: this.state.inputComponents.length });
+                this.setState({ currentMatchData: this.state.matchedDataSnapshot[this.state.inputComponents.length - 1] });
+                this.setState({ operationalData: this.state.currentMatchData });
+                
+            } else if((this.state.inputComponents.length === this.state.inputComponentsCount)){
+                this.setState({ inputComponentsCount: this.state.inputComponents.length }, () => {
+                    console.log('current word is handled now')
+                    this.setState({ currentMatchData: this.componentMatcher(this.state.operationalData, this.state.inputComponents[this.state.inputComponents.length - 1]) });
+                })
+            }
+        });
     }
 
-    componentMatcher(inputDataset, matchingWord){
-        if(matchingWord === ''){
+    componentMatcher(inputDataset, matchingWord) {
+        matchingWord = matchingWord.split(' ').join('');
+        if (matchingWord === '') {
             return [];
         }
-
-        console.log(`słowo: ${matchingWord}`);
-        console.log(inputDataset);
-
         let outputDataset = inputDataset.filter((item) => {
-            console.log(item);
             let temporaryComponentsArray = item.components.filter((component) => {
                 return (component.toLowerCase().includes(matchingWord.toLowerCase()))
             })
             return (temporaryComponentsArray.length === 0) ? false : true;
         })
-
         return outputDataset;
     }
 
