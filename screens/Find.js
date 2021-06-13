@@ -12,10 +12,12 @@ export default class Find extends Component {
     //part of navigations
     state = {
         data: [],
-        operationalData: [],
         isLoading: true,
         inputText: '',
-        inputComponents: []
+        inputComponents: [],
+        currentMatchData: [],
+        operationalData: [],
+        inputComponentsCount: 1
     };
 
     constructor(props) {
@@ -25,8 +27,8 @@ export default class Find extends Component {
     render() {
         let properView = '';
 
-        if (this.state.operationalData) {
-            properView = <FlatList contentContainerStyle={{ paddingBottom: 20 }} style={{ paddingTop: 20 }} data={this.state.operationalData}
+        if (this.state.currentMatchData) {
+            properView = <FlatList contentContainerStyle={{ paddingBottom: 20 }} style={{ paddingTop: 20 }} data={this.state.currentMatchData}
                 renderItem={({ item }) =>
                     <Card title={item.title} content={item.components}>
                         <Text>{item.description}</Text>
@@ -68,27 +70,28 @@ export default class Find extends Component {
     }
 
     inputTextTracker = (text) => {
-        this.state.inputComponents = text.split(' ');
+        this.setState({ operationalData: JSON.parse(JSON.stringify(this.state.data)) }, () =>{
+            this.setState({ currentMatchData: this.componentMatcher(this.state.operationalData, text)});
+        })
+    }
 
-        if(text === ''){
-            this.setState({operationalData: []});
-            return;
+    componentMatcher(inputDataset, matchingWord){
+        if(matchingWord === ''){
+            return [];
         }
 
-        this.setState({ operationalData: JSON.parse(JSON.stringify(this.state.data)) })
-        this.setState({ inputText: text }, () => {
-            this.setState({
-                operationalData: this.state.data.filter((item) => {
-                    let temporaryComponentsArray = [];
-                    temporaryComponentsArray = item.components.filter((component) => {
-                        return (component.toLowerCase().includes(this.state.inputText.toLowerCase()))
-                    })
-                    console.log(temporaryComponentsArray);
-                    console.log(this.state.inputComponents);
-                    return (temporaryComponentsArray.length === 0) ? false : true;
-                })
+        console.log(`słowo: ${matchingWord}`);
+        console.log(inputDataset);
+
+        let outputDataset = inputDataset.filter((item) => {
+            console.log(item);
+            let temporaryComponentsArray = item.components.filter((component) => {
+                return (component.toLowerCase().includes(matchingWord.toLowerCase()))
             })
-        });
+            return (temporaryComponentsArray.length === 0) ? false : true;
+        })
+
+        return outputDataset;
     }
 
     //styles

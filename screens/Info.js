@@ -4,7 +4,7 @@ import globalStyles from '../styles/styles';
 import TitleBar from '../shared/TitleBar';
 
 
-//info Screen Component
+//info screen component
 export default class Info extends Component {
 
   //component lifecycle
