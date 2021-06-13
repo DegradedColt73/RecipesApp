@@ -6,6 +6,8 @@ import Home from '../screens/Home';
 import Info from '../screens/Info';
 import Find from '../screens/Find';
 import ViewAll from '../screens/ViewAll';
+import Settings from '../screens/Settings';
+import Favourites from '../screens/Favourites';
 
 //navigation drawer
 export default class HomeDrawer extends Component {
@@ -22,6 +24,8 @@ export default class HomeDrawer extends Component {
                     <this.Drawer.Screen name="Find" component={Find} />
                     <this.Drawer.Screen name="View All" component={ViewAll} />
                     <this.Drawer.Screen name="Info" component={Info} />
+                    <this.Drawer.Screen name="Settings" component={Settings} />
+                    <this.Drawer.Screen name="Favourites" component={Favourites} />
                 </this.Drawer.Navigator>
             </NavigationContainer>
         );

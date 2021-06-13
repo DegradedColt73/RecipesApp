@@ -13,7 +13,7 @@ export default class Tile extends Component {
         return (
             <View style={this.styles.cardContainer}>
                 <View style={this.styles.cardContent}>
-                    <MaterialIcons name={this.props.iconName} size={50} color="#fff" />
+                    <Text><MaterialIcons name={this.props.iconName} size={80} color="#fff" /></Text>
                     <Text style={this.styles.textHeader}>{this.props.children}</Text>
                 </View>
             </View>
@@ -38,6 +38,7 @@ export default class Tile extends Component {
             shadowColor: '#333',
             backgroundColor: this.props.backgroundColor,
             //content
+            display:'flex',
             alignItems: 'center',
             justifyContent: 'center',
         },
@@ -46,10 +47,12 @@ export default class Tile extends Component {
         },
         textHeader: {
             color: '#fff',
-            fontSize: 30,
-            fontFamily: 'OpenSans-Regular'
+            textAlign: 'center'
+            // color: '#fff',
+            // fontSize: 30,
+            // fontFamily: 'OpenSans-Regular'
         }
-        
+
     });
 };
 

@@ -26,6 +26,16 @@ export default class HomeTileContainer extends Component {
                             <Text>Info</Text>
                         </Tile>
                     </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigate('Favourites')}>
+                        <Tile backgroundColor='#fff263' iconName="star">
+                            <Text>Favourites</Text>
+                        </Tile>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigate('Settings')}>
+                        <Tile backgroundColor='#718792' iconName="settings">
+                            <Text>Settings</Text>
+                        </Tile>
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
         );
