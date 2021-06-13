@@ -4,7 +4,6 @@ import globalStyles from '../styles/styles';
 import HomeTileComponent from '../components/HomeTileContainer';
 import TitleBar from '../shared/TitleBar';
 
-
 //home screen component
 export default class Home extends Component {
 
